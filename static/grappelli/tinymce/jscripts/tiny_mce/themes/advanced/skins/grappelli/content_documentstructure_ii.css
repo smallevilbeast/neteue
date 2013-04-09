@@ -1,0 +1,16 @@
+/* -- Import Basic Documentstructure CSS ---------- */
+
+@import url('content_documentstructure.css');
+
+/* -- Language Specific Settings ---------- */
+
+body#tinymce h2:before          { content: "标题2"; }
+body#tinymce h3:before          { content: "标题3"; }
+body#tinymce h4:before          { content: "标题4"; }
+body#tinymce ol:before          { content: "编号"; }
+body#tinymce ul:before          { content: "专案符号"; }
+body#tinymce p:before           { content: "插入段落"; }
+body#tinymce code:before        { content: "插入代码"; }
+body#tinymce pre:before         { content: "插入HTML代码"; }
+body#tinymce blockquote:before  { content: "引用"; }
+body#tinymce div:before         { content: "Div"; }

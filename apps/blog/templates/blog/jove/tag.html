@@ -1,0 +1,7 @@
+{% extends "blog/jove/base.html" %}
+
+{% block title %}{{ tag.name }} - {% endblock %}
+
+{% block content %}
+    {% include "blog/jove/articles.html" with page_type=1 %}
+{% endblock %}

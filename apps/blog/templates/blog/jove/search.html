@@ -1,0 +1,37 @@
+{% extends "blog/jove/base.html" %}
+
+{% block title %}{{ title|default:"Search"}} - {% endblock %}
+{% block js %}
+	<script language="JavaScript">
+		$(function(){
+			$('div#pagenavi a').each(function(i) {
+				href = $(this).attr('href');
+				$(this).attr('href', href+'?q={{ query }}')
+			});
+		});
+	</script>
+{% endblock %}
+
+{% block content %}
+	<div class="post">
+	    {% if count > 0 %}
+		<p id="resultCount" class="highlight">共搜索到{{ count }}条结果，以下是{% if start == end %}{{ start }}{% else %}{{ start }} - {{ end }}{% endif %}条</p> 
+	    {% else %}
+	    <p id="resultCount" class="highlight">没有搜索到结果 T_T</p>
+	    {% endif %}
+	</div>
+	<div class="indent">
+    {% for item in results %}
+	    <article class="post">
+	    	<h3><a href="{{ item.link }}">{{ item.title }}</a></h3>
+			<p>{{ item.htmlSnippet|safe }}</p>
+			<p><a href="{{ item.link }}">继续阅读 →</a></p>
+		</article>
+	{% endfor %}
+	</div>
+	
+	{% if count > n_per_page %}
+		{% include "blog/jove/paginator.html" with page_type=3 %}
+	{% endif %}
+
+{% endblock %}

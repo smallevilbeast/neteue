@@ -1,0 +1,27 @@
+{% extends "blog/jove/base.html" %}
+
+{% block title %}
+所有分类 - 
+{% endblock %}
+
+{% block content %}
+<div class="indent">
+{% for category in categories_with_articles %}
+	<h2><a href="{{ category.get_absolute_url }}">{{ category.name }}</a></h2>
+	
+	<ul class="archive">
+		{% for article in category.articles %}
+		<li>
+			<div class="post-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></div>
+			<div class="post-details">发表于{{ article.created|date:"Y年 bj日 P" }}</div>
+		</li>
+		{% endfor %}
+	
+	</ul>
+	
+	<div class="navigation clear">
+		<div><a href="{{ category.get_absolute_url }}" style="font-weight: bold;">查看 &quot; {{ category.name }} &quot; 下更多文章 &raquo; </a></div>
+	</div>
+{% endfor %}
+</div>
+{% endblock %}

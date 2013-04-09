@@ -1,0 +1,8 @@
+{% extends "blog/jove/base.html" %}
+
+{% block title %}{{ title|default:"首页"}} - {% endblock %}
+
+{% block content %}
+    {% include "blog/jove/articles.html" %}
+{% endblock %}
+

@@ -1,0 +1,11 @@
+*.pyc
+.#*
+*.mo
+*.pyo
+*.py#
+*po~
+*INFO#
+local_manage.py
+*.egg-info/*
+local_settings.py
+migrations

@@ -1,0 +1,19 @@
+{% extends "blog/jove/base.html" %}
+{% load duoshuo_tags %}
+
+{% block title %}{{ title|default:"好友留言"}} - {% endblock %}
+
+{% block content %}
+<div id="post-233" class="post-233 page type-page status-publish hentry">
+    <h1 class="entry-title">好友留言</h1>
+	<div class="entry-content">
+	    <p>有想交换链接的可以留言方便后台添加链接</p>
+        <p>网站地址：http://neteue.com/</p>
+        <p>网站名称：小邪兽</p>
+        <!-- <p>&nbsp;</p> -->
+	</div><!-- .entry-content -->
+</div>    
+{% if comments %}
+<a name="comments">{% duoshuo_comments %}</a>
+{% endif %}
+{% endblock %}

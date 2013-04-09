@@ -1,0 +1,51 @@
+{% if page_type == 0 %}
+{% url "blog_index" as page_url %}
+{% endif %}
+{% if page_type == 1 %}
+{% url "blog_category slug" as page_url %}
+{% endif %}
+{% if page_type == 2 %}
+{% url "blog_tag slug" as page_url %}
+{% endif %}
+{% if page_type == 3 %}
+{% url "blog_search" as page_url %}
+{% endif %}
+
+<div id="pagenavi">
+	{% if current_page.has_previous %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ current_page.previous_page_number }}/" >«</a>
+	{% endif %}
+	{% if page <= left_continual_max %}
+	    {% for i in left_continual_range %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	    {% endfor %}
+	{% else %}
+	    {% for i in left_edge_range %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ i }}">{{ i }}</a>
+	    {% endfor %}
+    <span>...</span>
+	    {% for i in left_range %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ i }}">{{ i }}</a>
+	    {% endfor %}
+	{% endif %}
+
+    <span class="page-numbers current">{{ page }}</span>
+	
+	{% if page >= right_continual_min %}
+	    {% for i in right_continual_range %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ i }}">{{ i }}</a>
+		{% endfor %}
+	{% else %}
+	    {% for i in right_range %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ i }}">{{ i }}</a>
+	    {% endfor %}
+	<span>...</span>
+	    {% for i in right_edge_range %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ i }}">{{ i }}</a>
+	    {% endfor %}
+	{% endif %}
+	
+	{% if current_page.has_next %}
+    <a class="page-numbers" href="{{ page_url }}page/{{ current_page.next_page_number }}/" >»</a>
+	{% endif %}
+</div>

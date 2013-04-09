@@ -1,0 +1,31 @@
+{% extends "blog/jove/base.html" %}
+{% block title %}{{ article.title }} - {% endblock %}
+{% load duoshuo_tags %}
+
+{% block content %}
+<div>
+  <article>
+  {% if article.title %}
+<div id="post" class="post post type-post status-publish format-standard hentry ">
+  <h2 class="entry-title"><a href="{{ article.get_absolute_url }}" title="{{ article.title }}" rel="bookmark">{{ article.title }}</a></h2>
+
+<div class="entry-meta">
+  <span class="entry-date">{{ article.modified|date:"Y-m-d" }}</span><span class="author vcard">{{ article.author }}</span><span class="cat-links"><a href="{{ article.category.get_absolute_url }}" title="" rel="category tag">{{ article.category }}</a></span>
+</div><!-- .entry-meta -->
+{% endif %}
+{% block main %}
+<div class="entry-content">
+  {{ article.content|safe }}
+</div><!-- .entry-content -->
+{% endblock %}
+{% if footer %}
+
+{% endif %}
+</article>
+{% if comments %}
+
+<a name="comments">{% duoshuo_comments %}</a>
+
+{% endif %}
+</div>
+{% endblock %}
