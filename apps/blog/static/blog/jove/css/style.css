@@ -159,9 +159,6 @@ a:link, a:visited {
 	color: #BF514C;
 	text-decoration: none;
 }
-/* a:hover { */
-/* 	text-decoration: underline; */
-/* } */
 h1, h2, h3, h4, h5, h6 {
 	text-shadow: 0 0 1px #DDDDDD;
 }
@@ -491,9 +488,7 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	color: #888;
 	text-decoration: none;
 }
-/* .page-title a:active, .page-title a:hover { */
-/* 	text-decoration: underline; */
-/* } */
+
 #content .entry-title {
 	color: #555;
 	font-size: 1.3em;
