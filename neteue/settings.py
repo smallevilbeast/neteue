@@ -214,6 +214,19 @@ GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 
 
+# Google CustomSearch api
+# Google Url Shortener api
+GOOGLE_SIMPLE_API_KEY = ''
+GOOGLE_SEARCH_ENGINE_UNIQUE_ID = ''
+GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
+GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
+
+# sae
+ACCESS_KEY=''
+SECRET_KEY=''
+APP_NAME=''
+ALLOWED_HOSTS = []
+
 #local settings
 try:
     from local_settings import *
