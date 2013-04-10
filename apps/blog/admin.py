@@ -33,6 +33,7 @@ class ArticleTagInline(admin.TabularInline):
     
 class CategoryAdmin(admin.ModelAdmin):
     list_display = ("name", "slug", "order")
+    prepopulated_fields = {"slug" : ("name", )} # 使用name字段来智能填充 Slug 字段
     
 class TagAdmin(admin.ModelAdmin):    
     inlines = (ArticleTagInline,)
