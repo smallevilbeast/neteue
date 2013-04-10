@@ -12,15 +12,17 @@
 	<ul class="archive">
 		{% for article in category.articles %}
 		<li>
-			<div class="post-title"><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></div>
-			<div class="post-details">发表于{{ article.created|date:"Y年 bj日 P" }}</div>
+			<div class="post-title">
+                <a href="{{ article.get_absolute_url }}">{{ article.title }}</a>   {{ article.created|date:"Y-m-d" }}
+            </div>
 		</li>
 		{% endfor %}
 	
 	</ul>
 	
 	<div class="navigation clear">
-		<div><a href="{{ category.get_absolute_url }}" style="font-weight: bold;">查看 &quot; {{ category.name }} &quot; 下更多文章 &raquo; </a></div>
+		<div><a href="{{ category.get_absolute_url }}" >查看 &quot; {{ category.name }} &quot; 下更多文章 &raquo; </a></div>
+		<p></p>
 	</div>
 {% endfor %}
 </div>

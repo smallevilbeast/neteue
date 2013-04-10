@@ -1,7 +1,4 @@
 {% load static %}
-<li id="timer" class="widget-container widget_text">
-    <object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000" codebase="http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=3,0,5,0" width="745" height="140"><param name="wmode" value="transparent"><embed src="{% get_static_prefix %}flash/time_honehone_clock.swf" tppabs="time_honehone_clock.swf"  quality="high"  pluginspage="http://www.macromedia.com/go/getflashplayer" height="85" wmode="transparent"></embed></object>
-</li>
 
 <li id="text" class="widget-container widget_text">
     <h3 class="widget-title">新浪微博</h3>
@@ -9,7 +6,6 @@
     <iframe width="100%" height="400" class="share_self" frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&amp;width=0&amp;height=400&amp;fansRow=2&amp;ptype=0&amp;speed=0&amp;skin=1&amp;isTitle=0&amp;noborder=0&amp;isWeibo=1&amp;isFans=0&amp;uid=1908513890&amp;verifier=2cf42040&amp;colors=d6f3f7,ffffff,333333,0082cb,ecfbfd&amp;dpc=1"></iframe>	  
     </div>
 </li>
-
 
 <li id="recent-posts-2" class="widget-container widget_recent_entries">
     <h3 class="widget-title">点击排行</h3>
@@ -19,7 +15,6 @@
 		{% endfor %}
     </ul>
 </li>
-
 
 <li id="tag_cloud-3" class="widget-container widget_tag_cloud">
     <h3 class="widget-title">标签</h3><div class="tagcloud">
@@ -38,31 +33,6 @@
 	{% endfor %}
     </ul>
 </li>
-
-
-<!-- <li id="recent-comment" class="widget-container widget_recent_entries"> -->
-<!-- 	<h3 class="widget-title">最新评论</h3> -->
-<!-- 	<ul class="ds-recent-comments"  style="padding: 5px;"><li></li></ul> -->
-
-<!-- </li> -->
-
-<!-- <li id="recent-visiter" class="widget-container widget_recent_entries"> -->
-<!-- 	<h3 class="widget-title">最新访客</h3> -->
-<!-- 	<ul class="ds-recent-visitors"></ul> -->
-<!-- 	<\!--多说js加载开始，一个页面只需要加载一次 -\-> -->
-<!-- 	<script type="text/javascript"> -->
-<!-- 	var duoshuoQuery = {short_name:"Neteue"}; -->
-<!-- 	(function() { -->
-<!-- 	    var ds = document.createElement('script'); -->
-<!-- 	    ds.type = 'text/javascript';ds.async = true; -->
-<!-- 	    ds.src = 'http://static.duoshuo.com/embed.js'; -->
-<!-- 	    ds.charset = 'UTF-8'; -->
-<!-- 	    (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds); -->
-<!-- 	})(); -->
-<!-- 	</script> -->
-<!-- 	<\!--多说js加载结束，一个页面只需要加载一次 -\-> -->
-<!-- </li> -->
-
 
 <li id="linkcat" class="widget-container widget_links">
 	<h3 class="widget-title">友情链接</h3>
