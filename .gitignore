@@ -8,5 +8,6 @@
 local_manage.py
 *.egg-info/*
 local_settings.py
+sae_settings.py
 migrations
 site-packages.zip
