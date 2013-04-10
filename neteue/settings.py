@@ -241,7 +241,7 @@ GOOGLE_SEARCH_ENGINE_UNIQUE_ID = ''
 GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 
-ALLOWED_HOSTS = [".neteue.com",] # 部署时允许所有来源访问
+ALLOWED_HOSTS = [".neteue.com",] if not DEBUG else ["*",] # 部署时允许所有来源访问
 
 #local settings
 try:

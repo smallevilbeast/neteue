@@ -159,9 +159,9 @@ a:link, a:visited {
 	color: #BF514C;
 	text-decoration: none;
 }
-a:hover {
-	text-decoration: underline;
-}
+/* a:hover { */
+/* 	text-decoration: underline; */
+/* } */
 h1, h2, h3, h4, h5, h6 {
 	text-shadow: 0 0 1px #DDDDDD;
 }
