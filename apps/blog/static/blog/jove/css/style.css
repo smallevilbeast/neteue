@@ -491,9 +491,9 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	color: #888;
 	text-decoration: none;
 }
-.page-title a:active, .page-title a:hover {
-	text-decoration: underline;
-}
+/* .page-title a:active, .page-title a:hover { */
+/* 	text-decoration: underline; */
+/* } */
 #content .entry-title {
 	color: #555;
 	font-size: 1.3em;
