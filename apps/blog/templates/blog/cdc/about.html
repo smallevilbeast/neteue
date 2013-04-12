@@ -1,0 +1,17 @@
+{% extends "blog/cdc/base.html" %}
+{% load duoshuo_tags %}
+
+{% block title %}{{ title|default:"关于Neteue"}} - {% endblock %}
+
+{% block content %}
+<div class="titlebar">&nbsp;</div>
+<div class="about">
+<p>CDC成立于2006年5月18日</p>
+<p>全称是Customer Research & User Experience Design Center（即用户研究与体验设计中心）作为腾讯的核心部门之一。CDC自成立以来，就一直向着“做世界一流的互联网设计团队，为用户创造优质‘在线生活’体验”这一愿景努力，致力于不断提升腾讯全线产品的用户体验。</p>
+<!-- <div class="about_cdc"></div> -->
+</div>
+{% if comments %}
+<a name="comments">{% duoshuo_comments %}</a>
+{% endif %}
+{% endblock %}
+

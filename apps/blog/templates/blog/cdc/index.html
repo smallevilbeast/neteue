@@ -1,0 +1,7 @@
+{% extends "blog/cdc/base.html" %}
+
+{% block title %}{{ title|default:"首页"}} - {% endblock %}
+
+{% block content %}
+    {% include "blog/cdc/articles.html" %}
+{% endblock %}

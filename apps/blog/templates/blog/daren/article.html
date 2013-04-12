@@ -1,0 +1,32 @@
+{% extends "blog/daren/base.html" %}
+{% block title %}{{ article.title }} - {% endblock %}
+{% load duoshuo_tags %}
+
+{% block content %}
+
+<section class="blogbody">
+
+    <hgroup class="{{ article.category.slug }}">
+        <small><a href="{{ article.category.get_absolute_url }}" title="查看 {{ article.category }} 中的全部文章">{{ article.category }}</a> <span>»</span> {{ article.title }}</small>
+    </hgroup>
+
+    <article>
+        <section class="post" id="post-20764" >
+            <h2 class="title"><a href="{{ article.get_absolute_url }}" title="{{ article.title }}">{{ article.title }}</a></h2>
+            <section class="info">
+                <time>{{ article.modified|date:"m月 d, Y" }}</time>
+                <span class="category">分类: <a href="{{ article.category.get_absolute_url }}" title="查看 {{ article.category }} 中的全部文章" rel="category tag">{{ article.category }}</a></span>
+                <span class="info-span-line"> </span>标签: <a href="" rel="tag">工具</a>, <a href="" rel="tag">配色</a>.
+                    <a href="{{ article.get_absolute_url }}#respond" class="comments-link"  class="ds-thread-count" data-thread-key="20764" title="">评论</a>  <!--<g:plusone size="small"></g:plusone>-->
+            </section>
+        {{ article.content|safe }}
+        </section>
+    </article>
+</section>
+
+{% if comments %}
+
+<a name="comments">{% duoshuo_comments %}</a>
+{% endif %}
+
+{% endblock %}

@@ -1,0 +1,51 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="Description" content="Neteue Blog">
+<meta name="Keywords" content="Django, Python, gtk">
+<meta id="author" content="neteue">
+<title>{% block title %}{% endblock %}</title>  
+{% block css %}{% endblock %}
+<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/cdc/css/global.css">
+<link rel="alternate" type="application/rss+xml" title="Neteue RSS Feed" href="{% url 'blog_feed' %}">
+<link rel="apple-touch-icon" href="{% get_static_prefix %}blog/images/neteue.png">
+<script type="text/javascript" src="{% get_static_prefix %}jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}blog/cdc/js/globals.js"></script>
+{% block js %}{% endblock %}
+</head>
+
+<body>
+<!--Header-->
+
+<div id="header">
+<div id="top">
+<div id="nav">
+    <a onfocus="this.blur()" href="/" id="logo"><cite>Neteue</cite></a>
+    <div id="menu">
+    	<ul>
+        <li id="on"><a onfocus="this.blur()" href="/">首页</a></li>
+        <li><a onfocus="this.blur()" href="{% url 'blog_about' %}">关于</a></li>
+        <li><a onfocus="this.blur()" href="{% url 'blog_about' %}">留言板</a></li>
+        <li id="rss"><a onfocus="this.blur()" href="{% url 'blog_feed' %}" class="rss" target="_blank"><cite>RSS</cite></a></li>
+        </ul>
+    </div>
+</div>
+</div>
+</div>
+<!--Header End-->
+
+<!--Container-->
+<div id="container">
+
+    <div id="content">
+        {% block content %}{% endblock %}	
+    </div><!--Content End-->
+
+<!--Sidebar-->
+<div id="sidebar">
+{% block sidebar %}{% include "blog/cdc/sidebar.html" %}{% endblock %}
+</div>
+<!--Sidebar End-->
+</div>
+<!--Container End-->
+{% block footerbar %}{% include "blog/cdc/footer.html" %}{% endblock %}

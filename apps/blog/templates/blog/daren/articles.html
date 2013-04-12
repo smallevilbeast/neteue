@@ -1,0 +1,21 @@
+{% for article in current_page.object_list %}
+<article>
+    <section class="post" id="post-21019">
+        <h2><a href="{{ article.get_absolute_url }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></h2>
+        <section class="info"><time>{{ article.modified|date:"m月 d, Y" }}</time> 
+            <span class="category">分类: <a href="{{ article.category.get_absolute_url }}" title="{{ article.category }}" rel="category tag">{{ article.category }}</a></span>
+            <span class="info-span-line"> | </span>
+			<a href="{{ article.get_absolute_url }}#respond" class="comments-link" data-thread-key="21019" title="《{{ article.title }}》上的评论">评论</a>
+            <span class="info-span-line"> | </span>
+        </section>
+
+        <!-- <a href=""><img src="" class="aligncenter wp-post-image tfe" alt="" title=""></a> --> 
+        <p>{{ article.abstract|safe|truncatewords_html:20 }}</p>
+        <p class="read-more"><a href="{{ article.get_absolute_url }}">阅读全文 »</a></p>
+    </section>
+</article>
+{% endfor %}
+
+{% if p.num_pages > 1 %}
+    {% include "blog/daren/paginator.html" with page_type=page_type|default:0 %}
+{% endif %}

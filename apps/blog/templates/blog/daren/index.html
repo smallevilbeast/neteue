@@ -1,0 +1,13 @@
+{% extends "blog/daren/base.html" %}
+
+{% block title %}{{ title|default:"首页"}} - {% endblock %}
+
+{% block content %}
+<section class="indexbody">
+    <hgroup>
+        <h1>Neteue</h1>
+        <h2><span style="font-size:36px;color:#DC6210">-2013-</span><br>LinuxDeepin，一起加油!</h2>
+    </hgroup>
+    {% include "blog/daren/articles.html" %}
+</section>  
+{% endblock %}

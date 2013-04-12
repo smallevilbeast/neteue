@@ -1,0 +1,30 @@
+{% for article in current_page.object_list %}
+    <!--content_text-->
+    <div class="content_text">
+    <div class="title">
+    <a href="#" class="avatar"><img src="normal"><span><img src="hover"></span></a>
+    <i class="line_h"></i> <!-- 分隔线 -->
+    <h3><a href="{{ article.get_absolute_url }}">{{ article.title }}</a></h3>
+    <p><a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a> / {{ article.modified|date:"Y.m.d"}}</p>
+    <a onfocus="this.blur()" class="up" href="{{ article.get_absolute_url }}#comments">32</a>
+    </div>
+	
+    <!--content_banner-->
+    <div class="content_banner">
+    <!-- <a href="{{ article.get_absolute_url }}"><img src=""></a> -->
+    <div class="text"><p>{{ article.abstract|safe|truncatewords_html:20 }}</p></div>
+    </div>
+	
+    <!--toolBar-->
+    <div class="toolBar">
+        <ul>
+            <li class="browse">浏览:3,162</li>
+            <li class="like">喜爱:7</li>
+            <!-- <li class="share" onmouseover="share_more(7135,this)"><a href="javascript:;">分享到...</a></li> -->
+        </ul>
+        <a href="{{ article.get_absolute_url }}" class="more">阅读全文</a>    
+    </div>
+	
+    </div><!--content_text End-->
+{% endfor %}
+{% include "blog/cdc/paginator.html" with page_type=page_type|default:0 %}

@@ -1,0 +1,25 @@
+{% extends "blog/cdc/base.html" %}
+{% block title %}{{ article.title }} - {% endblock %}
+{% load duoshuo_tags %}
+
+{% block content %}
+<div class="content_text2">
+    <div class="title">
+    <a href="#" class="avatar"><img src="normal"><span><img src="hover"></span></a>
+    <i class="line_h"></i> <!-- 分隔线 -->
+    <h3>{{ article.title }}</h3>
+    <p><a href="{{ article.category.get_absolute_url }}">{{ article.category }}</a> / {{ article.modified|date:"Y.m.d"}}</p>
+    <a onfocus="this.blur()" class="up" href="{{ article.get_absolute_url }}#comments">32</a>
+    </div>
+    <!--content_banner-->
+    <div class="content_banner">
+    <div class="text"><p>{{ article.content|safe }}</p></div>
+    </div>
+
+	
+ </div><!--content_text End-->
+
+{% if comments %}
+<a name="comments">{% duoshuo_comments %}</a>
+{% endif %}
+{% endblock %}

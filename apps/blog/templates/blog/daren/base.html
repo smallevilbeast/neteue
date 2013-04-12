@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="keywords" content="Python, Django, gtk">
+<meta name="description" content="Neteue个人blog">
+<title>{% block title %}{% endblock %}</title> 
+{% block css %}{% endblock %}
+<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/style.css" />
+<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/pygments/murphy.css" />
+<script type="text/javascript" src="{% get_static_prefix %}jquery/1.6.2/jquery.min.js"></script>
+<script type="text/javascript" src="{% get_static_prefix %}blog/daren/js/script.js"></script>
+{% block js %}{% endblock %}
+
+<!--[if lt IE 9]>
+
+<script src="{% get_static_prefix %}blog/daren/js/html5.js"></script>
+
+<![endif]-->
+ <!-- enables nested comments in WP 2.7 -->
+</head>
+
+<body>
+<div id="container" class="clearfix">
+    <header>
+        	<a class="logo" href="/" title="Neteue">Neteue</a>
+            <h3>小邪兽</h3>
+    </header><!-- end header -->
+  
+    <div class="main-content">
+    
+    	<div id="content">
+        {% block content %}{% endblock %}
+        </div><!-- end content -->
+    
+        <div id="sidebar" class="clearfix"></div>
+	
+    </div><!-- end main-content -->
+	
+</div><!-- end #container -->
+
+{% include "blog/daren/footer.html" %}
+</body>

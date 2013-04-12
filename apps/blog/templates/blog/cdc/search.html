@@ -1,0 +1,41 @@
+{% extends "blog/cdc/base.html" %}
+{% block title %}{{ title|default:"Search"}} - {% endblock %}
+
+{% block js %}
+	<script language="JavaScript">
+		$(function(){
+			$('div.page a').each(function(i) {
+				href = $(this).attr('href');
+				$(this).attr('href', href+'?q={{ query }}')
+			});
+		});
+	</script>
+{% endblock %}
+
+
+{% block content %}
+{% for item in results %}
+<div class="content_text">
+    <div class="title">
+    <h3><a href="{{ item.link }}">{{ item.title }}</a></h3>
+    <a onfocus="this.blur()" class="up" href="{{ item.link }}#comments">19</a>
+    </div>
+    <!--content_banner-->
+    <div class="content_banner">
+    <div class="text1">
+    <p>{{ item.htmlSnippet|safe }}</p>
+    </div>
+    </div>
+    <div class="toolBar">
+        <a href="{{ item.link }}" class="more">阅读全文</a>		
+    </div>
+	
+
+</div><!--content_text End-->
+{% endfor %}
+
+{% if count > n_per_page %}
+    {% include "blog/cdc/paginator.html" with page_type=3 %}
+{% endif %}
+
+{% endblock %}

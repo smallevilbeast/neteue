@@ -45,7 +45,7 @@ DATABASES = {
 
 # Hosts/domain names that are valid for this site; required if DEBUG is False
 # See https://docs.djangoproject.com/en/1.5/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [".neteue.com",] if not DEBUG else []
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -241,7 +241,8 @@ GOOGLE_SEARCH_ENGINE_UNIQUE_ID = ''
 GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 
-ALLOWED_HOSTS = [".neteue.com",] if not DEBUG else ["*",] # 部署时允许所有来源访问
+
+BLOG_THEME = "jove"
 
 #local settings
 try:

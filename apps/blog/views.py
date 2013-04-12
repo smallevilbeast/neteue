@@ -32,7 +32,7 @@ from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from models import Article, Link, Category, Tag
 from search import GoogleSearch, Record
 
-blog_theme = getattr(settings, "BLOG_THEME", "jove")
+blog_theme = getattr(settings, "BLOG_THEME", "daren")
 
 global_settings={
     'SITE_TITLE':"Neteue",
@@ -67,7 +67,7 @@ def common_response(request):
         "links"    : Link.objects.all(),
         "tags"     : tags,
         'categories': Category.objects.all(),        
-        'populars': Article.objects.order_by('-clicks')[:5],
+        'populars': Article.completed_objects.order_by('-clicks')[:5],
         }
     return commons
 
@@ -189,6 +189,7 @@ def search(request, page=1):
     
     count = 0
     p = None
+    results = []
     if len(query) > 0:
         search = GoogleSearch(query, page)
         count, results = search()

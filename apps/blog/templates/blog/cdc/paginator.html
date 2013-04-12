@@ -1,0 +1,56 @@
+{% if page_type == 0 %}
+{% url "blog_index" as page_url %}
+{% endif %}
+{% if page_type == 1 %}
+{% url "blog_category slug" as page_url %}
+{% endif %}
+{% if page_type == 2 %}
+{% url "blog_tag slug" as page_url %}
+{% endif %}
+{% if page_type == 3 %}
+{% url "blog_search" as page_url %}
+{% endif %}
+
+<!--Page-->
+<div class="page">
+    {% if p.num_pages > 1 %}
+	    {% if current_page.has_previous %}
+        <a href="{{ page_url }}page/{{ current_page.previous_page_number }}/" class="previous"> &lt; 上页 </a>  
+	    {% endif %}
+	    {% if page <= left_continual_max %}
+	        {% for i in left_continual_range %}
+        <a href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	        {% endfor %}
+	    {% else %}
+	        {% for i in left_edge_range %}
+        <a href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	        {% endfor %}
+         &nbsp;...
+	        {% for i in left_range %}
+        <a href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	        {% endfor %}
+	    {% endif %}
+	    
+        <span class="current">{{ page }}</span>
+	    
+	    {% if page >= right_continual_min %}
+	        {% for i in right_continual_range %}
+        <a href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	    	{% endfor %}
+	    {% else %}
+	        {% for i in right_range %}
+        <a href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	        {% endfor %}
+         &nbsp;...
+	        {% for i in right_edge_range %}
+        <a href="{{ page_url }}page/{{ i }}/">{{ i }}</a>
+	        {% endfor %}
+	    {% endif %}
+	    
+	    {% if current_page.has_next %}
+        <a class="next" href="{{ page_url }}page/{{ current_page.next_page_number }}/" > 下页 &gt; </a>
+	    {% endif %}
+    {% endif %}
+    <a href="#top" class="back_top"></a>
+</div><!--Page End-->
+
