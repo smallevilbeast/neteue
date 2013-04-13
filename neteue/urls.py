@@ -46,11 +46,18 @@ urlpatterns = patterns('',
 #     (r'^admin/filebrowser/', include(site.urls)),
 # )
 
+urlpatterns += patterns(
+        '',
+        url(r'^ckeditor/', include('ckeditor.urls'))
+)
+
 # Blog
 urlpatterns += patterns(
     "",
     url(r'^', include("apps.blog.urls"))
 )
+
+
 
 
 if settings.DEBUG:

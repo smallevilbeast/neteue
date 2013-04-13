@@ -168,6 +168,7 @@ INSTALLED_APPS = (
     # 'filebrowser',
     # 'mptt',
     # 'south',
+    'ckeditor',
     'pagedown',
     'apps.blog',
     'apps.duoshuo',
@@ -244,6 +245,15 @@ GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 
 BLOG_THEME = "jove"
 
+CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': 840,
+    },
+}
 #local settings
 try:
     from local_settings import *

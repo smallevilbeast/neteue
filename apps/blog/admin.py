@@ -24,6 +24,8 @@
 import markdown
 from django.db import models 
 from django.contrib import admin
+from ckeditor.widgets import CKEditorWidget
+from django import forms
 from pagedown.widgets import AdminPagedownWidget
 
 from models import (Category, Tag, Article, ArticleTag, Link, BlackList, Subscriber)
@@ -46,11 +48,11 @@ class ArticleAdmin(admin.ModelAdmin):
     search_fields = ("title", "content")
     
     formfield_overrides = {
-        models.TextField: {'widget': AdminPagedownWidget },
+        models.TextField: {'widget': CKEditorWidget },
         }
 
     fieldsets = [
-        ("文章编辑", {"fields" : ("title", "slug", "markdown",)}),
+        ("文章编辑", {"fields" : ("title", "slug", "content",)}),
         ("日期", {"fields" : ("created", "modified")}),
         ("信息", {"fields" : ("category", "author", "status", "is_always_above", "share")}), 
         ]
@@ -59,12 +61,6 @@ class ArticleAdmin(admin.ModelAdmin):
     inlines = (ArticleTagInline,) 
     list_per_page = 10
     ordering = ["-created"]
-    
-    def save_model(self, request, obj, form, change):
-        '''新建，修改页面'''
-        obj.author=request.user
-        obj.content=markdown.markdown(obj.markdown,['codehilite'])
-        return super(ArticleAdmin, self).save_model(request, obj, form, change)
     
     
 class LinkAdmin(admin.ModelAdmin):

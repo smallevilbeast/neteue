@@ -91,9 +91,9 @@ class Article(models.Model):
     
     title = models.CharField(max_length=100, verbose_name="标题")
     slug = models.SlugField(max_length=100)
-    # content = models.TextField(verbose_name="内容")
-    markdown = models.TextField(verbose_name=u'内容')
-    content = models.TextField(blank=True, editable=False)
+    content = models.TextField(verbose_name="内容")
+    # markdown = models.TextField(verbose_name=u'内容')
+    # content = models.TextField(blank=True, editable=False)
     status = models.IntegerField(choices=STATUS_CHOICE, default=1, verbose_name="状态")
     created = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     modified = models.DateTimeField(default=timezone.now, verbose_name="修改时间")
