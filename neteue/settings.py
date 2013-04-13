@@ -22,7 +22,7 @@
 
 from common import get_path
 
-DEBUG = False
+DEBUG = True
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
