@@ -29,7 +29,9 @@ from managers import (CompletedArticleManager, EnabledSubscriberManager)
 
 from django.db.models.signals import post_save
 from django.dispatch import receiver
-from common.sitemaps import ping_all_search_engines
+# from common.sitemaps import ping_all_search_engines
+from django.contrib.sitemaps import ping_google
+
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="分类名称")
@@ -200,7 +202,7 @@ def ping_search_engines(sender, instance, **kwargs):
     
     if not settings.DEBUG and article.status == 2:
         try:    
-            ping_all_search_engines()
+            ping_google()
         except:    
             pass
         

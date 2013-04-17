@@ -11,3 +11,4 @@ local_settings.py
 sae_settings.py
 migrations
 site-packages.zip
+apps/blog/static/uploads

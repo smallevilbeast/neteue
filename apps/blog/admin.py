@@ -21,12 +21,9 @@
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 
-import markdown
 from django.db import models 
 from django.contrib import admin
 from ckeditor.widgets import CKEditorWidget
-from django import forms
-from pagedown.widgets import AdminPagedownWidget
 
 from models import (Category, Tag, Article, ArticleTag, Link, BlackList, Subscriber)
 
