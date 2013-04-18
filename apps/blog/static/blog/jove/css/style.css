@@ -430,7 +430,7 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	margin: 0 0 20px 0;
 }
 #content table {
-	border: 1px solid #999999;
+	/* border: 1px solid #999999; */
 	margin: 0 -1px 24px 0;
 	text-align: left;
 	width: 100%;
@@ -442,8 +442,8 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	border-right: 1px solid #999;
 }
 #content tr td {
-	border-top: 1px solid #999999;
-	border-right: 1px solid #999;
+	/* border-top: 1px solid #999999; */
+	/* border-right: 1px solid #999; */
 	padding: 3px 15px;
 }
 #content tr.odd td {
@@ -495,7 +495,7 @@ DESCRIPTION: Full width content with no sidebar; used for attachment pages
 	line-height: 1;
 	margin-bottom: 3px;
 	padding-bottom: 3px;
-	border-bottom: 1px solid #bbb;
+	/* border-bottom: 1px solid #bbb; */
 }
 #content .single .entry-title {
 	border-bottom: none;
