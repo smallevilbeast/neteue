@@ -53,11 +53,11 @@
 }
 
 .syntaxhighlighter {
-  width: 100% !important;
+  /* width: 100% !important; */
   margin: 1em 0 1em 0 !important;
   position: relative !important;
   overflow: auto !important;
-  font-size: 0.8em !important;
+  /* font-size: 0.8em !important; */
 }
 .syntaxhighlighter.source {
   overflow: hidden !important;
