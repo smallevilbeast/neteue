@@ -206,3 +206,13 @@ def ping_search_engines(sender, instance, **kwargs):
         except:    
             pass
         
+
+@receiver(post_save, sender=Article, dispatch_uid="sync_to_pan")
+def sync_to_pan(sender, instance, **kwargs):
+    article = instance
+    
+    if article.share:
+        article.share = False
+        article.save(update_fields=["share"])
+        from backup import backup_db
+        backup_db()

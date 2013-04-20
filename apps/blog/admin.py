@@ -59,7 +59,6 @@ class ArticleAdmin(admin.ModelAdmin):
     list_per_page = 10
     ordering = ["-created"]
     
-    
 class LinkAdmin(admin.ModelAdmin):
     list_display = ("name", "site")
     

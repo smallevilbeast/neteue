@@ -349,3 +349,9 @@ class NetPan(object):
 
     def mkdir(self, path):
         return self._create(path, [], "", isdir=1)
+    
+    
+if __name__ == "__main__":    
+    bpan = NetPan("username", "passwd")
+    if bpan.check_login():
+        bpan.mkdir("/word/job/document")
