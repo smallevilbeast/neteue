@@ -86,9 +86,9 @@ class NetPan(object):
         
         login_url = 'https://passport.baidu.com/v2/api/?login&tpl=mn&time=%d' % utils.timestamp()
         data = self.curl.request(login_url).strip()[1:-1]
+        print data
         # data = eval(data, type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())
         data = parser_json(data)
-        print data
         if int(data.get("error_no", 100)) != 0:
             logger.debug("Login passport error")
             return False
