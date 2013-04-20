@@ -100,7 +100,7 @@ class Article(models.Model):
     created = models.DateTimeField(auto_now_add=True, verbose_name="创建时间")
     modified = models.DateTimeField(default=timezone.now, verbose_name="修改时间")
     is_always_above = models.BooleanField(default=False, verbose_name="置顶")
-    share = models.BooleanField(default=False, verbose_name="分享到社交网络")
+    share = models.BooleanField(default=False, verbose_name="同步到网盘")
     clicks = models.IntegerField(default=0, editable=False, verbose_name="点击次数")
     
     category = models.ForeignKey(Category, verbose_name="分类")

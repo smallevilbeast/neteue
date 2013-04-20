@@ -40,12 +40,6 @@ urlpatterns = patterns('',
     url(r'^admin/', include(admin.site.urls)),
 )
 
-# Grappelli url mapping
-# urlpatterns += patterns('',
-#     (r'^grappelli/', include('grappelli.urls')),
-#     (r'^admin/filebrowser/', include(site.urls)),
-# )
-
 urlpatterns += patterns(
         '',
         url(r'^ckeditor/', include('ckeditor.urls'))

@@ -171,10 +171,8 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     
     # 'filebrowser',
-    # 'mptt',
-    # 'south',
+    'south',
     'ckeditor',
-    'pagedown',
     'apps.blog',
     'apps.duoshuo',
     'common',
@@ -260,6 +258,11 @@ CKEDITOR_CONFIGS = {
         'width': 840,
     },
 }
+
+# baidu pan
+BAIDU_PAN_USERNAME = ""
+BAIDU_PAN_PASSWD = ""
+
 #local settings
 try:
     from local_settings import *
