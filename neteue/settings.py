@@ -20,9 +20,14 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
+import os
 from common import get_path
 
-DEBUG = True
+if os.path.exists(get_path("site-packages.zip")):
+    DEBUG = True
+else:    
+    DEBUG = False
+    
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -173,6 +178,7 @@ INSTALLED_APPS = (
     'apps.blog',
     'apps.duoshuo',
     'common',
+    'netpan',
 )
 
 # A sample logging configuration. The only tangible logging
