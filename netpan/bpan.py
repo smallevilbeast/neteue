@@ -33,7 +33,7 @@ import urllib
 from utils import Curl, parser_json
 import utils
 
-loglevel = logging.DEBUG
+loglevel = logging.INFO
 console_format = "%(levelname)-8s: %(message)s"
 datefmt = "%H:%M:%S"
 logging.basicConfig(level=loglevel, format=console_format, datefmt=datefmt)
@@ -94,8 +94,10 @@ class NetPan(object):
         
         param_out = data["param_out"]
         param_in = data["param_in"]
-        params = {v : param_out[k.replace("name", "contex")] for k, v in param_out.items() if k.endswith("_name")}
-        params.update({v: param_in[k.replace("name", "value")] for k,v in param_in.items() if k.endswith("_name")})
+        
+        # fix python 2.6 
+        params = dict([(v, param_out[k.replace("name", "contex")]) for k, v in param_out.items() if k.endswith("_name")])
+        params.update(dict([(v, param_in[k.replace("name", "value")]) for k,v in param_in.items() if k.endswith("_name")]))
         params["username"] = self.username.decode("utf-8").encode("gbk")
         params["password"] = self.password
         params["safeflg"]  = ""

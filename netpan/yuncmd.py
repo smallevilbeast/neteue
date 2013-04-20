@@ -146,3 +146,11 @@ def run_cmd(username, passwd):
     if client.check_login():
         c = YunCmd(client)
         c.cmdloop()
+
+        
+if __name__ == "__main__":        
+    import sys
+    if len(sys.argv) < 3:
+        print "Usage: yuncmd username passwd"
+    else:    
+        run_cmd(sys.argv[1], sys.argv[2])
