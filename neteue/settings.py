@@ -171,7 +171,6 @@ INSTALLED_APPS = (
     # 'django.contrib.admindocs',
     
     # 'filebrowser',
-    'south',
     'ckeditor',
     'apps.blog',
     'apps.duoshuo',
