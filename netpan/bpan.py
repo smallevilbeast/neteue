@@ -30,10 +30,11 @@ import pycurl
 import urllib
 
 
-from utils import Curl, parser_json
+from utils import parser_json
+from netlib import Curl
 import utils
 
-loglevel = logging.INFO
+loglevel = logging.DEBUG
 console_format = "%(levelname)-8s: %(message)s"
 datefmt = "%H:%M:%S"
 logging.basicConfig(level=loglevel, format=console_format, datefmt=datefmt)
@@ -71,44 +72,68 @@ class NetPan(object):
         self.username = username
         self.password = password
         self.__bduss = None
+        
+    def get_token(self):    
+        url = "https://passport.baidu.com/v2/api/?getapi&tpl=netdisk&apiver=v3&tt=%s&class=login" % utils.timestamp()
+        ret = self.api_request(url)
+        return ret["data"]["token"]
+    
+    def get_verifycode(self, code_string):
+        url = "https://passport.baidu.com/cgi-bin/genimage?" + code_string
+        print url 
+        code = raw_input("Please input verifycode > ")
+        return code
     
     def check_login(self, stage=0):
         self.curl.request("http:/pan.baidu.com/")
+        
         ret = self.api_request("https://pan.baidu.com/api/account/thirdinfo")
         if ret["errno"] == 0:
             logger.debug("Login check success!")
             return True
         
-        # 登陆校验失败(超过两次登陆校验)
+        # More than twice landing check
         if stage >= 2:
             logger.debug("Login check failed!")
             return False
         
-        login_url = 'https://passport.baidu.com/v2/api/?login&tpl=mn&time=%d' % utils.timestamp()
-        data = self.curl.request(login_url).strip()[1:-1]
-        data = eval(data, type('Dummy', (dict,), dict(__getitem__=lambda s,n:n))())
-        if int(data.get("error_no", 100)) != 0:
-            logger.debug("Login passport error")
-            return False
+        # Get token
+        token = self.get_token()
         
-        param_out = data["param_out"]
-        param_in = data["param_in"]
+        # Check require verifycode
+        params = dict(token=token,
+                      tpl="netdisk",
+                      apiver="v3",
+                      tt=utils.timestamp(),
+                      username=self.username,
+                      isphone="false")
+        check_login_url = "https://passport.baidu.com/v2/api/?logincheck&" + urllib.urlencode(params)
+        ret = self.api_request(check_login_url)
+        code_string =  ret["data"]["codeString"]
         
-        # fix python 2.6 
-        params = dict([(v, param_out[k.replace("name", "contex")]) for k, v in param_out.items() if k.endswith("_name")])
-        params.update(dict([(v, param_in[k.replace("name", "value")]) for k,v in param_in.items() if k.endswith("_name")]))
-        params["username"] = self.username.decode("utf-8").encode("gbk")
-        params["password"] = self.password
-        params["safeflg"]  = ""
-        params["mem_pass"] = "on"
-        if params["verifycode"] and stage == 1:
-            self.loginfo("Login check require verifycode")
+        if code_string:
+            logger.debug("Login check require verifycode")
+            verifycode = self.get_verifycode(code_string)
+        else:    
+            verifycode = ""
             
-        params['staticpage'] = "http://pan.baidu.com/res/static/thirdparty/pass_v3_jump.html"
-            
-        html = self.curl.request("https://passport.baidu.com/v2/api/?login", 
-                                 data=params, method="POST")        
-        
+        # try to login    
+        login_params = dict(staticpage="http://pan.baidu.com/res/static/thirdparty/pass_v3_jump.html",
+                            charset="utf-8",
+                            token=token,
+                            tpl="netdisk",
+                            tt=utils.timestamp(),
+                            codestring=code_string,
+                            isPhone="false",
+                            safeflg=0,
+                            u="http://pan.baidu.com/",
+                            username=self.username,
+                            password=self.password,
+                            verifycode=verifycode,
+                            mem_pass="on",
+                            )    
+        login_url = "https://passport.baidu.com/v2/api/?login"
+        html = self.curl.request(login_url, data=login_params, method="POST")
         url = re.findall(r"encodeURI\('(.*?)'\)", html)[0]
         self.curl.request(url)
         return self.check_login(stage + 1)
@@ -324,7 +349,6 @@ class NetPan(object):
                       method = 'post')
         ret = self.api_request("http://pan.baidu.com/api/create?a=commit&channel=chunlei&clienttype=0&web=1",
                                method="POST", extra_data=params)
-        # {"fs_id":2157439985,"server_filename":"ck.txt","path":"\/ck.txt","size":1728,"ctime":1363701601,"mtime":1363701601,"isdir":0,"errno":0}
         if ret['errno'] == 0:
             print ret['path'], "save ok!"
         else:
@@ -342,7 +366,6 @@ class NetPan(object):
                                 method="UPLOAD", data=files)
         ret = parser_json(resp)
         size = os.path.getsize(filepath)
-        # {"md5":"16c1c8e61670eac54979f3da18b954ab","request_id":839611680}
         return self._create(os.path.join(upload_to, os.path.basename(filepath)),
                             [ret['md5']], size)
 
@@ -352,5 +375,4 @@ class NetPan(object):
     
 if __name__ == "__main__":    
     bpan = NetPan("username", "passwd")
-    if bpan.check_login():
-        bpan.mkdir("/word/job/document")
+    bpan.check_login()

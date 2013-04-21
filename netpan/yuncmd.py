@@ -8,7 +8,7 @@ import os
 
 class YunCmd(Cmd):
     prompt = "☁ > "
-    intro = "Baidu Yun cli <andelf@gmail.com>"
+    intro = "Baidu Yun cli"
     def __init__(self, client):
         Cmd.__init__(self)
 

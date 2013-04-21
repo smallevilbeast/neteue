@@ -27,7 +27,7 @@ from datetime import datetime
 from django.conf import settings
 from common.xdg import get_cache_file
 from common.threads import threaded
-from netpan import NetPan
+from netpan import NetPan, run_cmd
 
 
 db_name = settings.DATABASES["default"]["NAME"]
@@ -63,3 +63,6 @@ def backup_db():
             netpan_client.upload(db_output_file, "/neteue/db/")
         if os.path.isfile(uploads_output_file):    
             netpan_client.upload(uploads_output_file, "/neteue/uploads/")
+
+def run_netpan():            
+    run_cmd(settings.BAIDU_PAN_USERNAME, settings.BAIDU_PAN_PASSWD)    
