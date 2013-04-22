@@ -63,12 +63,14 @@ def backup_db():
     if netpan_client.check_login():
         if os.path.isfile(db_localpath):
             netpan_client.remove("/neteue/db/%s" % db_basename)
-            print "start uploading..."
+            print "start backup db...."
             netpan_client.upload(db_localpath, "/neteue/db/")
-            print "end uploading...."
+            print "end backup db...."
         if os.path.isfile(staticfile_localpath):    
+            print "start backup staticfiles...."
             netpan_client.remove("/neteue/uploads/%s" % staticfile_basename)
             netpan_client.upload(staticfile_localpath, "/neteue/uploads/")
+            print "end backup staticfiles...."
 
 def run_netpan():            
     run_cmd(settings.BAIDU_PAN_USERNAME, settings.BAIDU_PAN_PASSWD)    
