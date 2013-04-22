@@ -34,10 +34,10 @@ from utils import parser_json
 from netlib import Curl
 import utils
 
-loglevel = logging.DEBUG
-console_format = "%(levelname)-8s: %(message)s"
-datefmt = "%H:%M:%S"
-logging.basicConfig(level=loglevel, format=console_format, datefmt=datefmt)
+# loglevel = logging.INFO
+# console_format = "%(levelname)-8s: %(message)s"
+# datefmt = "%H:%M:%S"
+# logging.basicConfig(level=loglevel, format=console_format, datefmt=datefmt)
 logger = logging.getLogger(__name__)
 
 def format_size(num, unit='B'):

@@ -39,19 +39,21 @@ netpan_client = NetPan(settings.BAIDU_PAN_USERNAME, settings.BAIDU_PAN_PASSWD)
 
 
 def get_output_name(dirname="db", ext=".gz"):
-    return get_cache_file("%s/%s%s" % (dirname, datetime.now().strftime("%Y%m%d%H%M%S"), ext))
+    base_name = "%s%s" % (datetime.now().strftime("%Y%m%d"), ext)
+    full_path = get_cache_file("%s/%s" % (dirname, base_name))
+    return base_name, full_path
 
 @threaded
 def backup_db():
-    db_output_file = get_output_name("db", ".gz")
+    db_basename, db_localpath = get_output_name("db", ".gz")
     backup_db_cmd = "mysqldump --opt %s -u %s -p%s | gzip > %s" % (db_name, db_user, 
                                                                    db_passwd, 
-                                                                   db_output_file)
+                                                                   db_localpath)
     os.system(backup_db_cmd)    
-    uploads_output_file = get_output_name("uploads", ".tar.gz")    
+    staticfile_basename, staticfile_localpath = get_output_name("uploads", ".tar.gz")    
     media_root = settings.MEDIA_ROOT
     
-    tar_fp = tarfile.open(uploads_output_file,"w|gz")     
+    tar_fp = tarfile.open(staticfile_localpath,"w|gz")     
     for root, dirs,files in os.walk(media_root):
         for f in files:
             tar_fp.add(os.path.join(root, f))
@@ -59,10 +61,12 @@ def backup_db():
     
     
     if netpan_client.check_login():
-        if os.path.isfile(db_output_file):
-            netpan_client.upload(db_output_file, "/neteue/db/")
-        if os.path.isfile(uploads_output_file):    
-            netpan_client.upload(uploads_output_file, "/neteue/uploads/")
+        if os.path.isfile(db_localpath):
+            netpan_client.remove("/neteue/db/%s" % db_basename)
+            netpan_client.upload(db_localpath, "/neteue/db/")
+        if os.path.isfile(staticfile_localpath):    
+            netpan_client.remove("/neteue/uploads/%s" % staticfile_basename)
+            netpan_client.upload(staticfile_localpath, "/neteue/uploads/")
 
 def run_netpan():            
     run_cmd(settings.BAIDU_PAN_USERNAME, settings.BAIDU_PAN_PASSWD)    
