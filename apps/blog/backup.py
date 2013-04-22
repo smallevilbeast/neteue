@@ -62,8 +62,8 @@ def backup_db():
     
     if netpan_client.check_login():
         if os.path.isfile(db_localpath):
+            print "start backup db...."            
             netpan_client.remove("/neteue/db/%s" % db_basename)
-            print "start backup db...."
             netpan_client.upload(db_localpath, "/neteue/db/")
             print "end backup db...."
         if os.path.isfile(staticfile_localpath):    
