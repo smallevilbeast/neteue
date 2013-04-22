@@ -43,7 +43,7 @@ def get_output_name(dirname="db", ext=".gz"):
     full_path = get_cache_file("%s/%s" % (dirname, base_name))
     return base_name, full_path
 
-@threaded
+# @threaded
 def backup_db():
     db_basename, db_localpath = get_output_name("db", ".gz")
     backup_db_cmd = "mysqldump --opt %s -u %s -p%s | gzip > %s" % (db_name, db_user, 
