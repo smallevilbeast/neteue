@@ -85,7 +85,22 @@ class YunCmd(Cmd):
         else:
             p = os.path.normpath(os.path.join(self._cp, path))
             self._cp = p
-
+            
+    def do_upload(self, arg):        
+        """upload: upload file to dst
+        upload file dst
+        """
+        args = shlex.split(arg)
+        
+        if len(args) == 2:
+            local, remote = args
+        else:    
+            local, = args
+            remote = self._cp
+            
+        if os.path.isfile(local):        
+            self._c.upload(local, remote)
+        
     def do_mkdir(self, arg):
         """mkdir: make a new dir
         mkdir [dir_name]
