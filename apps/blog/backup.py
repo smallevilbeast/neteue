@@ -38,9 +38,9 @@ db_passwd = settings.DATABASES["default"]["PASSWORD"]
 netpan_client = NetPan(settings.BAIDU_PAN_USERNAME, settings.BAIDU_PAN_PASSWD)
 
 
-def get_output_name(dirname="db", ext=".gz"):
-    base_name = "%s%s" % (datetime.now().strftime("%Y%m%d"), ext)
-    full_path = get_cache_file("%s/%s" % (dirname, base_name))
+def get_output_name(prefix="db", ext=".gz"):
+    base_name = "%s%s%s" % (prefix, datetime.now().strftime("%Y%m%d"), ext)
+    full_path = get_cache_file(base_name)
     return base_name, full_path
 
 @threaded
@@ -50,26 +50,25 @@ def backup_db():
                                                                    db_passwd, 
                                                                    db_localpath)
     os.system(backup_db_cmd)    
-    staticfile_basename, staticfile_localpath = get_output_name("uploads", ".tar.gz")    
+    images_basename, images_localpath = get_output_name("images", ".tar.gz")    
     media_root = settings.MEDIA_ROOT
     
-    tar_fp = tarfile.open(staticfile_localpath,"w|gz")     
+    tar_fp = tarfile.open(images_localpath, "w|gz")     
     for root, dirs,files in os.walk(media_root):
         for f in files:
             tar_fp.add(os.path.join(root, f))
     tar_fp.close()        
     
-    
     if netpan_client.check_login():
         if os.path.isfile(db_localpath):
             print "start backup db...."            
-            netpan_client.remove("/neteue/db/%s" % db_basename)
-            netpan_client.upload(db_localpath, "/neteue/db/")
+            netpan_client.remove("/neteue/%s" % db_basename)
+            netpan_client.upload(db_localpath, "/neteue/")
             print "end backup db...."
-        if os.path.isfile(staticfile_localpath):    
+        if os.path.isfile(images_localpath):    
             print "start backup staticfiles...."
-            netpan_client.remove("/neteue/uploads/%s" % staticfile_basename)
-            netpan_client.upload(staticfile_localpath, "/neteue/uploads/")
+            netpan_client.remove("/neteue/%s" % images_basename)
+            netpan_client.upload(images_localpath, "/neteue/")
             print "end backup staticfiles...."
 
 def run_netpan():            
