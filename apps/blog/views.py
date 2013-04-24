@@ -20,14 +20,12 @@
 # You should have received a copy of the GNU General Public License
 # along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
-import urllib2, hashlib
-
 from django.shortcuts import render_to_response, get_object_or_404
-from django.http import Http404, HttpResponse
+from django.http import Http404
 from django.template import RequestContext
 from django.conf import settings
 
-from django.db.models import Q, Count, Max, Min
+from django.db.models import Count, Max, Min
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from models import Article, Link, Category, Tag
 from search import GoogleSearch, Record
@@ -104,7 +102,11 @@ def paginator_response(request, page, p):
     return params
 
 def index(request, page=1):
-    p = Paginator(Article.completed_objects.all(), PAGE_SIZE)
+    if request.user.is_staff:
+        vaild_articles = Article.objects.all()
+    else:    
+        vaild_articles = Article.completed_objects.all()
+    p = Paginator(vaild_articles, PAGE_SIZE)
     
     try:
         current_page = p.page(page)
