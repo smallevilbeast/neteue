@@ -122,6 +122,8 @@ def index(request, page=1):
 
 def article(request, slug):
     article = get_object_or_404(Article, slug=slug)
+    if not article.is_public and not request.user.is_staff:
+        raise Http404
     data = {"article" : article, "comments" : True}
     data.update(common_response(request))
     article.click_once()

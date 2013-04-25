@@ -124,6 +124,10 @@ class Article(models.Model):
     def __unicode__(self):    
         return self.title
     
+    @property
+    def is_public(self):
+        return self.status == 2
+    
     @permalink
     def get_absolute_url(self):
         return ("blog_article", None, {"slug": self.slug})
