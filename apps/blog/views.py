@@ -28,9 +28,10 @@ from django.conf import settings
 from django.db.models import Count, Max, Min
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from models import Article, Link, Category, Tag
+from django.core.context_processors import csrf
 from search import GoogleSearch, Record
 
-blog_theme = getattr(settings, "BLOG_THEME", "daren")
+DEFAULT_BLOG_THEME = getattr(settings, "BLOG_THEME", "daren")
 
 global_settings={
     'SITE_TITLE':"Neteue",
@@ -47,6 +48,13 @@ PAGE_ENTRY_EDGE_NUM = 2
 MAX_FONT_SIZE = 20
 MIN_FONT_SIZE = 12
 MINUS_FONT_SIZE = MAX_FONT_SIZE - MIN_FONT_SIZE
+
+
+def get_blog_theme(request):
+    theme = request.COOKIES.get('blog_theme', DEFAULT_BLOG_THEME)
+    if theme not in settings.BLOG_THEMES:
+        return DEFAULT_BLOG_THEME
+    return theme
 
 def common_response(request):
     tags = Tag.objects.annotate(n_articles=Count("articles"))[:25]
@@ -116,19 +124,22 @@ def index(request, page=1):
     data = {"current_page" : current_page}
     data.update(common_response(request))
     data.update(paginator_response(request, page, p))
+    blog_theme = get_blog_theme(request)
     return render_to_response("blog/%s/index.html" % blog_theme, data, 
                               context_instance=RequestContext(request))
 
 
-def article(request, slug):
+def article(request, slug):     
     article = get_object_or_404(Article, slug=slug)
     if not article.is_public and not request.user.is_staff:
         raise Http404
-    data = {"article" : article, "comments" : True}
+    data = {"article" : article, "comments" : True, "article_tags" : article.tags.all()}
     data.update(common_response(request))
     article.click_once()
+    blog_theme = get_blog_theme(request)
     return render_to_response("blog/%s/article.html" % blog_theme, data, 
                               context_instance=RequestContext(request))
+
 
 def categories(request):
     categories_with_articles = Category.objects.all()
@@ -137,6 +148,7 @@ def categories(request):
         
     data = {"categories_with_articles" : categories_with_articles}
     data.update(common_response(request))
+    blog_theme = get_blog_theme(request)
     return render_to_response('blog/%s/categories.html' % blog_theme, data)
     
 def category(request, slug, page=1):
@@ -152,6 +164,7 @@ def category(request, slug, page=1):
     data = {"current_page" : current_page, "category" : category}
     data.update(common_response(request))
     data.update(paginator_response(request, page, p))
+    blog_theme = get_blog_theme(request)
     return render_to_response("blog/%s/category.html" % blog_theme, data, 
                               context_instance=RequestContext(request))
     
@@ -170,16 +183,19 @@ def tag(request, slug, page=1):
     data.update(common_response(request))
     if p.num_pages > 1:
         data.update(paginator_response(request, page, p))
+    blog_theme = get_blog_theme(request)
     return render_to_response('blog/%s/tag.html' % blog_theme, data)
 
 def about(request):
     data = {"comments" : True}
     data.update(common_response(request))
+    blog_theme = get_blog_theme(request)
     return render_to_response("blog/%s/about.html" % blog_theme, data)
 
 def guestbook(request):
     data = {"comments" : True}
     data.update(common_response(request))
+    blog_theme = get_blog_theme(request)
     return render_to_response("blog/%s/guestbook.html" % blog_theme, data)
 
 def search(request, page=1):
@@ -214,4 +230,5 @@ def search(request, page=1):
     data.update(common_response(request))
     if p and p.num_pages > 1:
         data.update(paginator_response(request, page, p))
+    blog_theme = get_blog_theme(request)
     return render_to_response('blog/%s/search.html' % blog_theme, data)

@@ -1,0 +1,24 @@
+<div class="header">
+	  <div class="new-feature"><a href="/features/">有新功能啦</a></div>
+	<h1 class="logo"><a href="/" title="首页" data-stack="" data-stack-bare="" data-stack-root="">tower.im</a></h1>
+	<ul class="nav">
+		<li id="nav-home"><a href="/" data-stack="" data-stack-bare="" data-stack-root="">首页</a></li>
+		<li id="nav-about"><a href="{% url 'blog_about' %}" data-stack="" data-stack-bare="" data-stack-root="" data-restore-position="">关于</a></li>
+		<li id="nav-guestbook"><a href="{% url 'blog_guestbook' %}" data-stack="" data-stack-bare="" data-stack-root="">留言</a></li>
+		<li id="nav-github"><a href="https://github.com/lovesnow/" target="_blank">GitHub</a></li>
+		<li id="nav-me"><a href="#" data-stack="" data-stack-root="">Wiki</a></li>
+	</ul>
+	<ul class="account-info">
+		<li class="member-settings">
+			<a class="link-member-menu" href="http://weibo.com/houshao55" target="_blank" title="小邪兽_deepin">
+				<img class="avatar" src="http://neteue.com/static/uploads/2013/04/27/0120821153311.jpg" alt="小邪兽">
+			</a>
+		</li>
+	</ul>
+	<div class="search-wrap">
+		<form id="form-search" class="form" method="get" action="{% url 'blog_search' %}">
+			<input id="txt-search" type="text" class="keyword" name="q">
+			<a href="javascript:;" class="link-search">搜索</a>
+		</form>
+	</div>
+</div>

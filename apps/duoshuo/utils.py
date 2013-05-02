@@ -60,7 +60,7 @@ def set_duoshuo_token(request, response):
         response.set_cookie('duoshuo_token', signed_token)
     return response
 
-def sync_article(article):
+def sync_article(request, article):
     userprofile = request.user.get_profile()
     if userprofile.duoshuo_id:
         author_id = userprofile.duoshuo_id
@@ -71,7 +71,7 @@ def sync_article(article):
     #TODO: get article url from urls.py
     url_hash = hashlib.md5(article.url).hexdigest()
     data = urllib.urlencode({
-        'short_name' : DUOSHUO_SHORT_NAME,
+        'short_name' : settings.DUOSHUO_SHORT_NAME,
         'thread_key' : article.id,
         'url' : article.url,
         'url_hash' : url_hash,

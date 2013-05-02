@@ -246,7 +246,8 @@ GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 
 
-BLOG_THEME = "jove"
+BLOG_THEME = "daren"
+BLOG_THEMES = ("daren", "jove")
 
 CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
 

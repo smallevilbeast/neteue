@@ -1,0 +1,35 @@
+{% extends "blog/daren/base.html" %}
+{% block title %}{{ title|default:"Search"}} - {% endblock %}
+{% block js %}
+	<script language="JavaScript">
+		$(function(){
+			$('div#page-single a').each(function(i) {
+				href = $(this).attr('href');
+				$(this).attr('href', href+'?q={{ query }}')
+			});
+		});
+	</script>
+{% endblock %}
+
+
+{% block content %}
+	{% if count > 0 %}
+		<p class="search-tit">共搜索到{{ count }}条结果，以下是{% if start == end %}{{ start }}{% else %}{{ start }} - {{ end }}{% endif %}条</p> 
+	{% else %}
+	    <p class="search-tit">没有搜索到结果 T_T</p>
+	{% endif %}
+    {% for item in results %}	
+    <article>
+        <section class="post" id="post-21019">
+            <h2><a href="{{ item.link }}" title="{{ item.title }}" target="_blank">{{ item.title }}</a></h2>
+            <!-- <a href=""><img src="" class="aligncenter wp-post-image tfe" alt="" title=""></a> --> 
+            <p>{{ item.htmlSnippet|safe }}</p>
+            <p class="read-more"><a href="{{ item.link }}">阅读全文 »</a></p>
+        </section>
+    </article>
+    {% endfor %}
+	
+	{% if count > n_per_page %}
+		{% include "blog/daren/paginator.html" with page_type=3 %}
+	{% endif %}
+{% endblock %}

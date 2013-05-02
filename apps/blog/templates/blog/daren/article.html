@@ -16,8 +16,13 @@
             <section class="info">
                 <time>{{ article.modified|date:"m月 d, Y" }}</time>
                 <span class="category">分类: <a href="{{ article.category.get_absolute_url }}" title="查看 {{ article.category }} 中的全部文章" rel="category tag">{{ article.category }}</a></span>
-                <span class="info-span-line"> </span>标签: <a href="" rel="tag">工具</a>, <a href="" rel="tag">配色</a>.
-                    <a href="{{ article.get_absolute_url }}#respond" class="comments-link"  class="ds-thread-count" data-thread-key="20764" title="">评论</a>  <!--<g:plusone size="small"></g:plusone>-->
+                <span class="info-span-line"> </span>
+                    {% if article_tags %}
+                        标签: 
+                        {% for article_tag in article_tags %}
+                        <a href="{{ article_tag.get_absolute_url }}" rel="tag">{{ article_tag.name }}</a>
+                        {% endfor %}
+                    {% endif %} | <a href="{{ article.get_absolute_url }}#respond" class="comments-link"  class="ds-thread-count" data-thread-key="{{ article.id }}" title="">评论</a>  <!--<g:plusone size="small"></g:plusone>-->
             </section>
         {{ article.content|safe }}
         </section>

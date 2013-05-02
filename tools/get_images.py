@@ -22,7 +22,7 @@ def get_images(url):
 
     
     
-get_images("http://www.shejidaren.com/wp-content/themes/Daren/style.css")    
+get_images("https://tower.im/assets/application-e29dbf5d5173307cca4468cdf9b9436a.css")    
     
     
     

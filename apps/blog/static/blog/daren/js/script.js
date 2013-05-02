@@ -47,3 +47,36 @@ $(function(){
 			$('html,body').animate({scrollTop:$(this.hash).offset().top}, 500);
 		});
 	});
+
+
+// headbar
+$(function(){
+	
+	var path_name = location.pathname.replace(new RegExp("/","gm"), "");
+	$(".header .nav li.active").removeClass("active");	
+	switch (path_name){
+	case "about":
+		$("#nav-about").addClass("active");
+		break;
+	case "guestbook":
+		$("#nav-guestbook").addClass("active");
+		break;
+	default:
+		$("#nav-home").addClass("active");
+	};
+	
+	$(".search-wrap").click(function(a){
+		return !1
+	}).click(function(b){
+		var c = $(b.currentTarget).closest(".search-wrap"),
+        d = $(document),
+        e = $("#form-search");		
+		if (c.hasClass("active")) return;		
+		c.addClass("active").find("#txt-search").focus(),
+		d.one("click.search", function(a) {
+		        c.removeClass("active").find("#txt-search").val(""), d.unbind("keyup.search")
+			}).bind("keyup.search", function(a) {
+                a.keyCode == 27 && (a.preventDefault(), d.trigger("click.search"))
+            }), !1
+	});
+});

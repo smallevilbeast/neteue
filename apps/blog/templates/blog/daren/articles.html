@@ -5,7 +5,7 @@
         <section class="info"><time>{{ article.modified|date:"m月 d, Y" }}</time> 
             <span class="category">分类: <a href="{{ article.category.get_absolute_url }}" title="{{ article.category }}" rel="category tag">{{ article.category }}</a></span>
             <span class="info-span-line"> | </span>
-			<a href="{{ article.get_absolute_url }}#respond" class="comments-link" data-thread-key="21019" title="《{{ article.title }}》上的评论">评论</a>
+			<a href="{{ article.get_absolute_url }}#respond" class="comments-link" data-thread-key="{{ article.id }}" title="《{{ article.title }}》上的评论">评论</a>
             <span class="info-span-line"> | </span>
         </section>
 
@@ -16,6 +16,4 @@
 </article>
 {% endfor %}
 
-{% if p.num_pages > 1 %}
-    {% include "blog/daren/paginator.html" with page_type=page_type|default:0 %}
-{% endif %}
+{% include "blog/daren/paginator.html" with page_type=page_type|default:0 %}

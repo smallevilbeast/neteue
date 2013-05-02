@@ -7,11 +7,34 @@
 <meta name="description" content="Neteue个人blog">
 <title>{% block title %}{% endblock %}</title> 
 {% block css %}{% endblock %}
-<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/style.css" />
-<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/style.css" />
-<link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/pygments/murphy.css" />
-<script type="text/javascript" src="{% get_static_prefix %}jquery/1.6.2/jquery.min.js"></script>
-<script type="text/javascript" src="{% get_static_prefix %}blog/daren/js/script.js"></script>
+    <link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/style.css" />
+    <link rel="stylesheet" type="text/css" media="all" href="{% get_static_prefix %}blog/daren/css/headbar.css" />
+    <script type="text/javascript" src="{% get_static_prefix %}jquery/1.6.2/jquery.min.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}blog/daren/js/script.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}common/js/jquery.cookie.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushPython.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushBash.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushXml.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushCss.js"></script>
+	<link type="text/css" rel="stylesheet" href="{% get_static_prefix %}syntaxhighlighter/styles/shCoreGitHub.css"/>
+	<link type="text/css" rel="stylesheet" href="{% get_static_prefix %}syntaxhighlighter/styles/shThemeGitHub.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
+    <script type="text/javascript" src="{% get_static_prefix %}common/js/theme.js"></script>
+    <!--多说js加载开始，一个页面只需要加载一次 -->
+    <script type="text/javascript">
+    var duoshuoQuery = {short_name:"Neteue"};
+    (function() {
+        var ds = document.createElement('script');
+    	ds.type = 'text/javascript';ds.async = true;
+    	ds.src = 'http://static.duoshuo.com/embed.js';
+    	ds.charset = 'UTF-8';
+    	(document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+    </script>
+	<!--多说js加载结束，一个页面只需要加载一次 -->
+
 {% block js %}{% endblock %}
 
 <!--[if lt IE 9]>
@@ -23,11 +46,12 @@
 </head>
 
 <body>
+{% include "blog/daren/headbar.html" %}
 <div id="container" class="clearfix">
-    <header>
-        	<a class="logo" href="/" title="Neteue">Neteue</a>
-            <h3>小邪兽</h3>
-    </header><!-- end header -->
+    <!-- <header> -->
+    <!--     	<a class="logo" href="/" title="Neteue">Neteue</a> -->
+    <!--         <h3>小邪兽</h3> -->
+    <!-- </header><\!-- end header -\-> -->
   
     <div class="main-content">
     
@@ -35,7 +59,7 @@
         {% block content %}{% endblock %}
         </div><!-- end content -->
     
-        <div id="sidebar" class="clearfix"></div>
+        <div id="sidebar" class="clearfix">{% include "blog/daren/sidebar.html" %}</div>
 	
     </div><!-- end main-content -->
 	

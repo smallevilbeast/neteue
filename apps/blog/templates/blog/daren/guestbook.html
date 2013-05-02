@@ -1,0 +1,22 @@
+{% extends "blog/daren/base.html" %}
+{% load duoshuo_tags %}
+
+{% block title %}{{ title|default:"留言"}} - {% endblock %}
+
+{% block content %}
+<div id="content">
+    <section class="pagebody">
+        <article>
+            <section class="post" id="post-2" >
+                <h2>好友留言</h2>
+        	    <p>有想交换链接的可以留言方便后台添加链接</p>
+                <p>网站地址：http://neteue.com/</p>
+                <p>网站名称：小邪兽</p>
+            </section>    
+        </article>
+    </section>
+</div>  
+{% if comments %}
+<a name="comments">{% duoshuo_comments %}</a>
+{% endif %}
+{% endblock %}

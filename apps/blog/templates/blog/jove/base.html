@@ -13,6 +13,7 @@
     <link rel="alternate" type="application/rss+xml" title="{{ settings.SITE_TITLE }} &raquo; Feed" href="/feed/" />
     <script type="text/javascript" src="{% get_static_prefix %}jquery/1.3.2/jquery.min.js"></script>
     <script type="text/javascript" src="{% get_static_prefix %}blog/jove/js/all.js"></script>
+    <script type="text/javascript" src="{% get_static_prefix %}common/js/jquery.cookie.js"></script>
 	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shCore.js"></script>
 	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushJScript.js"></script>
 	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushPython.js"></script>
@@ -22,6 +23,7 @@
 	<link type="text/css" rel="stylesheet" href="{% get_static_prefix %}syntaxhighlighter/styles/shCoreGitHub.css"/>
 	<link type="text/css" rel="stylesheet" href="{% get_static_prefix %}syntaxhighlighter/styles/shThemeGitHub.css"/>
 	<script type="text/javascript">SyntaxHighlighter.all();</script>
+    <script type="text/javascript" src="{% get_static_prefix %}common/js/theme.js"></script>
 	{% block js %}{% endblock %}
   </head>
   

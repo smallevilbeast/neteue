@@ -1,0 +1,27 @@
+{% extends "blog/daren/base.html" %}
+{% load duoshuo_tags %}
+{% block title %}{{ title|default:"关于Neteue"}} - {% endblock %}
+
+{% block content %}
+<div id="content">
+    <section class="pagebody">
+        <article>
+            <section class="post" id="post-2" >
+                <h2>关于本站</h2>
+        	    <p>Neteue使用Django Web框架搭建</p>
+                <h3></h3>
+                <p><a href="http://weibo.com/houshao55" target="_blank">@小邪兽</a> Linux Deepin团队成员</p>
+            </section>    
+        </article>
+    </section>
+</div>  
+{% if comments %}
+<a name="comments">{% duoshuo_comments %}</a>
+{% endif %}
+{% endblock %}
+
+
+  
+  
+  
+  

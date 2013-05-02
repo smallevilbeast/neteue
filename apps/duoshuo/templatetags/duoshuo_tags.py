@@ -1,4 +1,4 @@
-from django.template import Library, Node
+from django.template import Library, Node, TemplateSyntaxError
 from django.conf import settings
 from ..utils import remote_auth as ds_remote_auth
 
@@ -35,6 +35,7 @@ def duoshuo_comments(parser, token):
         return DuoshuoCommentsNode(short_name[1])
     else:
         raise TemplateSyntaxError, "duoshuo_comments tag takes SHORT_NAME as exactly one argument"
+    
 duoshuo_comments = register.tag(duoshuo_comments)
 
 @register.filter

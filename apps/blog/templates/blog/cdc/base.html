@@ -11,6 +11,15 @@
 <link rel="apple-touch-icon" href="{% get_static_prefix %}blog/images/neteue.png">
 <script type="text/javascript" src="{% get_static_prefix %}jquery/1.6.2/jquery.min.js"></script>
 <script type="text/javascript" src="{% get_static_prefix %}blog/cdc/js/globals.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shCore.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushJScript.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushPython.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushBash.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushXml.js"></script>
+	<script type="text/javascript" src="{% get_static_prefix %}syntaxhighlighter/scripts/shBrushCss.js"></script>
+	<link type="text/css" rel="stylesheet" href="{% get_static_prefix %}syntaxhighlighter/styles/shCoreGitHub.css"/>
+	<link type="text/css" rel="stylesheet" href="{% get_static_prefix %}syntaxhighlighter/styles/shThemeGitHub.css"/>
+	<script type="text/javascript">SyntaxHighlighter.all();</script>
 {% block js %}{% endblock %}
 </head>
 
