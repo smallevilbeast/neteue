@@ -43,6 +43,13 @@
             </div>
         </div>
 		
+{% if user.is_staff %}
+        <div class="widget">
+            <h3 class="widgettitle">最近访客</h3>
+        	<ul class="ds-recent-visitors"></ul>
+        </div>
+{% endif %}		
+		
 	    <div class="widget">
 	    	<h3 class="widgettitle">友情链接</h3>
 	    	<ul>
