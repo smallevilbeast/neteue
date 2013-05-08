@@ -156,6 +156,15 @@ class YunCmd(Cmd):
         """
         self._c.watch(arg)
         
+    def help_EOF(self):
+        print "Quits the program"
+        
+    def do_EOF(self, line):
+        sys.exit()        
+        
+    def do_exit(self, line):    
+        sys.exit()
+        
 def run_cmd(username, passwd):        
     client = bpan.NetPan(username, passwd)
     if client.check_login():
