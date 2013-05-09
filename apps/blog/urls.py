@@ -54,6 +54,7 @@ urlpatterns = patterns(
     
     # archives
     url(r'^archives/$', 'archives', name="blog_archives"),
+    url(r'^archives/page/(?P<page>\d+)/$', "archives", name="blog_archives_pages"),
     
     # # Subscriber
     # url(r'^subscriber/add/$', 'subscriber', name='blog_subscriber'),

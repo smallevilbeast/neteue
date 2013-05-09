@@ -28,7 +28,6 @@ from django.conf import settings
 from django.db.models import Count, Max, Min
 from django.core.paginator import Paginator, EmptyPage, InvalidPage
 from models import Article, Link, Category, Tag
-from django.core.context_processors import csrf
 from search import GoogleSearch, Record
 
 DEFAULT_BLOG_THEME = getattr(settings, "BLOG_THEME", "daren")
@@ -42,6 +41,7 @@ global_settings={
 }
 
 PAGE_SIZE = 5
+ARCHIVES_PAGE_SIZE = 25
 PAGE_ENTRY_DISPLAY_NUM = 6
 PAGE_ENTRY_EDGE_NUM = 2
 
@@ -140,14 +140,22 @@ def article(request, slug):
     return render_to_response("blog/%s/article.html" % blog_theme, data, 
                               context_instance=RequestContext(request))
 
-def archives(request):
+def archives(request, page=1):
     if request.user.is_staff:
         vaild_articles = Article.objects.all()
     else:    
         vaild_articles = Article.completed_objects.all()
         
-    data = {"archives" : vaild_articles}    
+    p = Paginator(vaild_articles, ARCHIVES_PAGE_SIZE)
+    
+    try:
+        current_page = p.page(page)
+    except (EmptyPage, InvalidPage):    
+        raise Http404
+    
+    data = {"current_page" : current_page}
     data.update(common_response(request))
+    data.update(paginator_response(request, page, p))
     blog_theme = get_blog_theme(request)
     return render_to_response("blog/%s/archives.html" % blog_theme, data)
     

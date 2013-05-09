@@ -1,14 +1,13 @@
 {% if page_type == 0 %}
 {% url "blog_index" as page_url %}
-{% endif %}
-{% if page_type == 1 %}
+{% elif page_type == 1 %}
 {% url "blog_category slug" as page_url %}
-{% endif %}
-{% if page_type == 2 %}
+{% elif page_type == 2 %}
 {% url "blog_tag slug" as page_url %}
-{% endif %}
-{% if page_type == 3 %}
+{% elif page_type == 3 %}
 {% url "blog_search" as page_url %}
+{% elif page_type == 4 %}
+{% url "blog_archives" as page_url %}
 {% endif %}
 
 <div id="page-single" class="clearfix">

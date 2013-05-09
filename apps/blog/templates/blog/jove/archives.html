@@ -7,7 +7,7 @@
     <section class="post" id="post-111">
         <table class="table">
         <tbody>
-		{% for article in archives %}
+		{% for article in current_page.object_list %}
             <tr>
             <td>{{ article.created|date:"d M Y" }}</td>
             <td><a href="{{ article.get_absolute_url }}" target="_blank">{{ article.title }}</a></td>
@@ -18,4 +18,8 @@
     </section>
 </article>
 
+{% if p.num_pages > 1 %}
+    {% include "blog/jove/paginator.html" with page_type=page_type|default:4 %}
+{% endif %}		
+		
 {% endblock %}
