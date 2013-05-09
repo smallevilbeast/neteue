@@ -1,6 +1,6 @@
 {% for article in current_page.object_list %}
 <article>
-    <section class="post" id="post-21019">
+    <section class="post" id="post-{{ article.id }}">
         <h2><a href="{{ article.get_absolute_url }}" title="{{ article.title }}" target="_blank">{{ article.title }}</a></h2>
         <section class="info"><time>{{ article.modified|date:"m月 d, Y" }}</time> 
             <span class="category">分类: <a href="{{ article.category.get_absolute_url }}" title="{{ article.category }}" rel="category tag">{{ article.category }}</a></span>

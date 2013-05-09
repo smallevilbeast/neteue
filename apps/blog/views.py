@@ -140,16 +140,16 @@ def article(request, slug):
     return render_to_response("blog/%s/article.html" % blog_theme, data, 
                               context_instance=RequestContext(request))
 
-
-def categories(request):
-    categories_with_articles = Category.objects.all()
-    for category in categories_with_articles:
-        category.articles = Article.completed_objects.filter(category=category)[:5]
+def archives(request):
+    if request.user.is_staff:
+        vaild_articles = Article.objects.all()
+    else:    
+        vaild_articles = Article.completed_objects.all()
         
-    data = {"categories_with_articles" : categories_with_articles}
+    data = {"archives" : vaild_articles}    
     data.update(common_response(request))
     blog_theme = get_blog_theme(request)
-    return render_to_response('blog/%s/categories.html' % blog_theme, data)
+    return render_to_response("blog/%s/archives.html" % blog_theme, data)
     
 def category(request, slug, page=1):
     category = get_object_or_404(Category, slug=slug)

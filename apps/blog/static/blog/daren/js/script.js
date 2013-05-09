@@ -61,6 +61,9 @@ $(function(){
 	case "guestbook":
 		$("#nav-guestbook").addClass("active");
 		break;
+	case "archives":	
+		$("#nav-archives").addClass("active");
+		break;
 	default:
 		$("#nav-home").addClass("active");
 	};

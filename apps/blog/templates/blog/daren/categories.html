@@ -1,0 +1,20 @@
+{% extends "blog/daren/base.html" %}
+{% block title %}{{ title|default:"归档"}}{% endblock %}
+{% block content %}
+<article>
+    <section class="post" id="post-111">
+        <table class="table">
+        <tbody>
+		{% for article in current_page.object_list %}
+            <tr>
+            <td>{{ article.created|date:"d M Y"</td>
+            <td><a href="{{ article.get_absolute_url }} target="_blank">{{ article.title }}</a></td>
+            </tr>
+		{% endfor %}	
+        </tbody>
+        </table>
+    </section>
+</article>
+
+{% endblock %}
+

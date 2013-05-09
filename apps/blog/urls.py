@@ -35,7 +35,6 @@ urlpatterns = patterns(
     url(r'article/(?P<slug>[-\w]+)/$', "article", name="blog_article"),
     
     # Category page
-    url(r'^category/$', 'categories', name='blog_categories'),
     url(r'^category/(?P<slug>\w+)/$', 'category', name='blog_category'),
     url(r'^category/(?P<slug>\w+)/page/(?P<page>\d+)/$', 'category', name='blog_category_pages'),
     
@@ -52,6 +51,9 @@ urlpatterns = patterns(
     # Search
     url(r'^search/$', 'search', name='blog_search'),
     url(r'^search/page/(?P<page>\d+)/$', 'search', name='blog_search_pages'),
+    
+    # archives
+    url(r'^archives/$', 'archives', name="blog_archives"),
     
     # # Subscriber
     # url(r'^subscriber/add/$', 'subscriber', name='blog_subscriber'),

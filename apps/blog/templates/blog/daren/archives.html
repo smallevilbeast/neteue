@@ -1,0 +1,26 @@
+{% extends "blog/daren/base.html" %}
+{% block title %}{{ title|default:"归档"}}{% endblock %}
+{% block content %}
+
+<section class="blogbody">
+    <!-- <hgroup class="{{ article.category.slug }}"> -->
+    <!--     <small>Archives</small> -->
+    <!-- </hgroup> -->
+    <article>
+        <section class="post" id="post-111">
+            <table class="table">
+            <tbody>
+    		{% for article in archives %}
+                <tr>
+                <td>{{ article.created|date:"d M Y" }}</td>
+                <td><a href="{{ article.get_absolute_url }}" target="_blank">{{ article.title }}</a></td>
+                </tr>
+    		{% endfor %}	
+            </tbody>
+            </table>
+        </section>
+    </article>
+</section>
+		
+
+{% endblock %}
