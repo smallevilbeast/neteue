@@ -35,7 +35,7 @@ from django.contrib.sitemaps import ping_google
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True, verbose_name="分类名称")
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     order = models.IntegerField(blank=True, null=True, verbose_name="顺序")
     
     class Meta:
@@ -64,7 +64,7 @@ class Category(models.Model):
 
 class Tag(models.Model):        
     name = models.CharField(max_length=50, unique=True, verbose_name="标签名称")
-    slug = models.SlugField()
+    slug = models.SlugField(unique=True)
     
     # through: 指定ArticleTag model来管理多对对关系.
     articles = models.ManyToManyField("Article", through="ArticleTag", verbose_name="文章")
@@ -92,7 +92,7 @@ class Article(models.Model):
         )
     
     title = models.CharField(max_length=100, verbose_name="标题")
-    slug = models.SlugField(max_length=100)
+    slug = models.SlugField(max_length=100, unique=True)
     content = models.TextField(verbose_name="内容")
     # markdown = models.TextField(verbose_name=u'内容')
     # content = models.TextField(blank=True, editable=False)
