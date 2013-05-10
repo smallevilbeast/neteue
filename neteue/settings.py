@@ -62,7 +62,7 @@ TIME_ZONE = 'Asia/Shanghai'
 # http://www.i18nguy.com/unicode/language-identifiers.html
 LANGUAGE_CODE = 'zh-CN'
 
-SITE_ID = 1
+SITE_ID = 1 if not DEBUG else 2
 
 # If you set this to False, Django will make some optimizations so as not
 # to load the internationalization machinery.
@@ -94,15 +94,6 @@ STATIC_ROOT = get_path("static")
 # Example: "http://example.com/static/", "http://static.example.com/"
 STATIC_URL = '/static/'
 
-# URL prefix for admin static files -- CSS, JavaScript and images.
-# Make sure to use a trailing slash.
-# Examples: "http://foo.com/static/admin/", "/static/admin/".
-
-# grappelli settings.
-# ADMIN_MEDIA_PREFIX = STATIC_URL + "grappelli/"  
-# GRAPPELLI_ADMIN_HEADLINE = "Neteue Site"
-# GRAPPELLI_ADMIN_TITLE = "Neteue Site"
-# GRAPPELLI_INDEX_DASHBOARD = 'neteue.dashboard.CustomIndexDashboard'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -122,6 +113,18 @@ STATICFILES_FINDERS = (
 
 # Make this unique, and don't share it with anybody.
 SECRET_KEY = 'e&0o1h5jzzs-q*4*34o!qyq&krc)ir$q42==-wh2__f)=y=dai'
+
+
+TEMPLATE_CONTEXT_PROCESSORS = (
+    'django.contrib.auth.context_processors.auth',
+    'django.core.context_processors.debug',
+    'django.core.context_processors.i18n',
+    'django.core.context_processors.media',
+    'django.core.context_processors.static',
+    'django.core.context_processors.tz',
+    'django.core.context_processors.request',
+    'django.contrib.messages.context_processors.messages',
+)
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
@@ -162,15 +165,15 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     
     # Grappelli
-    # 'grappelli.dashboard',    
-    # 'grappelli',
+    'grappelli.dashboard',    
+    'grappelli',
+    'filebrowser',    
     
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
-    
-    # 'filebrowser',
+
     'ckeditor',
     'apps.blog',
     'apps.duoshuo',
@@ -207,24 +210,15 @@ LOGGING = {
     }
 }
 
-
-
-
-# Filebrowser
-FILEBROWSER_DIRECTORY = ''
-FILEBROWSER_VERSIONS = {
-    'small_thumbnail': {'verbose_name': 'Small Thumbnail', 'width': 42, 'height': 42, 'opts': 'crop'},
-    'admin_thumbnail': {'verbose_name': 'Admin Thumbnail', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'thumbnail': {'verbose_name': 'Thumbnail (1 col)', 'width': 60, 'height': 60, 'opts': 'crop'},
-    'small': {'verbose_name': 'Small (2 col)', 'width': 140, 'height': '', 'opts': ''},
-    'medium': {'verbose_name': 'Medium (4col )', 'width': 300, 'height': '', 'opts': ''},
-    'big': {'verbose_name': 'Big (6 col)', 'width': 460, 'height': '', 'opts': ''},
-    'large': {'verbose_name': 'Large (8 col)', 'width': 680, 'height': '', 'opts': ''},
-}
-FILEBROWSER_ADMIN_VERSIONS = ['small_thumbnail', 'thumbnail','small', 'medium']
-
-
 SITE = 'http://127.0.0.1:8000' if DEBUG else 'http://neteue.com'
+
+# Grappelli
+GRAPPELLI_INDEX_DASHBOARD = 'neteue.dashboard.CustomIndexDashboard'
+GRAPPELLI_ADMIN_TITLE = "Neteue Site"
+
+# filebrowser
+FILEBROWSER_DIRECTORY = ''
+
 
 # Duo Shuo
 DUOSHUO_SECRET = ''
@@ -245,12 +239,12 @@ GOOGLE_SEARCH_ENGINE_UNIQUE_ID = ''
 GOOGLE_CUSTOM_SEARCH_ENDPOINT = 'https://www.googleapis.com/customsearch/v1'
 GOOGLE_URL_SHORTENER_ENDPOINT = 'https://www.googleapis.com/urlshortener/v1/url'
 
-
+# themes.
 BLOG_THEME = "daren"
 BLOG_THEMES = ("daren", "jove")
 
+# ckeditor settings.
 CKEDITOR_UPLOAD_PATH = MEDIA_ROOT
-
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'Full',

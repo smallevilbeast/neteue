@@ -51,8 +51,17 @@ urlpatterns += patterns(
     url(r'^', include("apps.blog.urls"))
 )
 
+# Grappelli
+urlpatterns += patterns(
+    '',
+    url(r'^grappelli/', include('grappelli.urls')),
+)
 
-
+# Filebrowser
+from filebrowser.sites import site
+urlpatterns += patterns('',
+   url(r'^admin/filebrowser/', include(site.urls)),
+)
 
 if settings.DEBUG:
     from django.contrib.staticfiles.urls import staticfiles_urlpatterns
