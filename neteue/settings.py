@@ -165,9 +165,9 @@ INSTALLED_APPS = (
     'django.contrib.sitemaps',
     
     # Grappelli
-    'grappelli.dashboard',    
-    'grappelli',
-    'filebrowser',    
+    # 'grappelli.dashboard',    
+    # 'grappelli',
+    # 'filebrowser',    
     
     # Uncomment the next line to enable the admin:
     'django.contrib.admin',
