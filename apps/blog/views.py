@@ -67,7 +67,7 @@ def common_response(request):
                 + MINUS_FONT_SIZE*(tag.n_articles-tag_min_articles)/(tag_max_articles-tag_min_articles)
             else:
                 tag.font_size = MINUS_FONT_SIZE
-    
+                
     commons = {
         "settings" : global_settings,
         "links"    : Link.objects.all(),
@@ -162,7 +162,12 @@ def archives(request, page=1):
 def category(request, slug, page=1):
     category = get_object_or_404(Category, slug=slug)
     
-    p = Paginator(Article.completed_objects.filter(category=category), PAGE_SIZE)
+    if request.user.is_staff:
+        vaild_articles = Article.objects.filter(category=category)
+    else:    
+        vaild_articles = Article.completed_objects.filter(category=category)        
+    
+    p = Paginator(vaild_articles, PAGE_SIZE)
     
     try:
         current_page = p.page(page)
@@ -180,7 +185,12 @@ def category(request, slug, page=1):
 def tag(request, slug, page=1):
     tag = get_object_or_404(Tag, slug=slug)
     
-    p = Paginator(Article.completed_objects.filter(tags__slug=slug), PAGE_SIZE)
+    if request.user.is_staff:
+        vaild_articles = Article.objects.filter(tags__slug=slug)
+    else:    
+        vaild_articles = Article.completed_objects.filter(tags__slug=slug)
+        
+    p = Paginator(vaild_articles, PAGE_SIZE)        
     
     try:
         current_page = p.page(page)
