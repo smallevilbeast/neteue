@@ -263,7 +263,8 @@ header { height:130px;float:left;width:100%; overflow:hidden}
 
 		
 
-	 .post img {display:block;padding:3px;margin:0 auto;max-width:550px;border:1px solid #b9baa6;-moz-box-radius:5px;-webkit-box-radius:5px;box-radius:5px;background-color:#e6e6d5;box-shadow:0 1px 2px rgba(0,0,0,.15);}
+	/*  .post img {display:block;padding:3px;margin:0 auto;max-width:550px;border:1px solid #b9baa6;-moz-box-radius:5px;-webkit-box-radius:5px;box-radius:5px;background-color:#e6e6d5;box-shadow:0 1px 2px rgba(0,0,0,.15);} */
+	 .post img {display:block;padding:3px;margin:0;max-width:550px;border:1px solid #b9baa6;-moz-box-radius:5px;-webkit-box-radius:5px;box-radius:5px;background-color:#e6e6d5;box-shadow:0 1px 2px rgba(0,0,0,.15);}
 	.post img.tfe {margin:0 auto 10px}
 
 	* html .post img { /* for IE6 */
