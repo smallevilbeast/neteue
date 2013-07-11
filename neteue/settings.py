@@ -257,6 +257,16 @@ CKEDITOR_CONFIGS = {
 BAIDU_PAN_USERNAME = ""
 BAIDU_PAN_PASSWD = ""
 
+
+if not DEBUG:
+# Cache
+    CACHES = {
+        'default': {
+            'BACKEND': 'django.core.cache.backends.memcached.MemcachedCache',
+            'LOCATION': '127.0.0.1:11211',
+            }
+        }
+
 #local settings
 try:
     from local_settings import *
